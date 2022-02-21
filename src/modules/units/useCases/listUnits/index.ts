@@ -1,7 +1,6 @@
-import { UnitsRepository } from "../../repositories/implementations/UnitsRepository";
-import { ListUnitsController } from "./ListUnitsController";
-import { ListUnitsUseCase } from "./ListUnitsUseCase";
-
+import { UnitsRepository } from '../../repositories/implementations/UnitsRepository';
+import { ListUnitsController } from './ListUnitsController';
+import { ListUnitsUseCase } from './ListUnitsUseCase';
 
 const unitsRepository = UnitsRepository.getInstance();
 

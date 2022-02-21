@@ -1,7 +1,7 @@
-import { Slot } from "../model/Slot";
+import { Slot } from '../model/Slot';
 
 interface ISlotsRepository {
   list(): Promise<Slot[]>;
 }
 
-export { ISlotsRepository }
+export { ISlotsRepository };
