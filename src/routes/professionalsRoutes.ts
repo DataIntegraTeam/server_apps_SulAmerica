@@ -5,6 +5,6 @@ const professionalsRoutes = Router();
 
 professionalsRoutes.get('/professionals', (request, response) => {
   return listProfessionalsController.handle(request, response);
-})
+});
 
 export { professionalsRoutes };

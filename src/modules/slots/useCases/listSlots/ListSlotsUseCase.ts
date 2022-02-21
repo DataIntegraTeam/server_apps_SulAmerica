@@ -1,18 +1,17 @@
 import { Slot } from '../../model/Slot';
 import { ISlotsRepository } from '../../repositories/ISlotsRepository';
 
-type TListSlotsUseCase = { data: Slot[] }
+type TListSlotsUseCase = { data: Slot[] };
 
 class ListSlotsUseCase {
-
-  constructor(private slotsRoutes: ISlotsRepository) { }
+  constructor(private slotsRoutes: ISlotsRepository) {}
 
   async execute(): Promise<TListSlotsUseCase> {
     const slots = await this.slotsRoutes.list();
 
-    const data: TListSlotsUseCase = { data: slots }
+    const data: TListSlotsUseCase = { data: slots };
     return data;
   }
 }
 
-export { ListSlotsUseCase }
+export { ListSlotsUseCase };

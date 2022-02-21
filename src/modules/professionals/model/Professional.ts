@@ -1,16 +1,15 @@
 import { v4 as uuidV4 } from 'uuid';
 
 class Professional {
-
   id?: string;
   unitId: string;
   name: string;
-  gender: "MALE" | "FEMALE";
+  gender: 'MALE' | 'FEMALE';
   document: {
-    type: string,
-    state: string,
-    number: string,
-  }
+    type: string;
+    state: string;
+    number: string;
+  };
   photo: string;
 
   constructor() {
@@ -20,4 +19,4 @@ class Professional {
   }
 }
 
-export { Professional }
+export { Professional };
