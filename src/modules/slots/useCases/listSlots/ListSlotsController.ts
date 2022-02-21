@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 
-import { ListAppointmentsUseCase } from "./ListAppointmentsUseCase";
+import { ListSlotsUseCase } from "./ListSlotsUseCase";
 
 
-class ListAppointmentsController {
-  constructor(private listAppointmentsUseCase: ListAppointmentsUseCase) { }
+class ListSlotsController {
+  constructor(private listSlotsUseCase: ListSlotsUseCase) { }
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const all = await this.listAppointmentsUseCase.execute();
+      const all = await this.listSlotsUseCase.execute();
 
       return response.status(200).json(all);
     } catch (error) {
@@ -19,4 +19,4 @@ class ListAppointmentsController {
   }
 }
 
-export { ListAppointmentsController }
+export { ListSlotsController }
