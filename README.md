@@ -7,7 +7,7 @@ Rodar API's ```npm run dev```
 
 Criando a API com Node.JS.
 
-Etapas concluidas:
+Etapas concluídas:
 
 - Obter Unidades - Ok
 - Obter Profissionais - Ok
