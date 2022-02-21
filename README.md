@@ -15,3 +15,4 @@ Etapas concluidas:
 - Criar Agendamento -
 - Cancelar Agendamento
 - Obter Detalhes de Especialidades (Verificar necessidade)
+  
