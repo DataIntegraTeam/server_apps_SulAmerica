@@ -5,7 +5,8 @@
 Rodar API's ```npm run dev```
 
 
-Criando a API com Node.JS
+Criando a API com Node.JS.
+
 Etapas concluidas:
 
 - Obter Unidades - Ok
@@ -14,3 +15,4 @@ Etapas concluidas:
 - Criar Agendamento -
 - Cancelar Agendamento
 - Obter Detalhes de Especialidades (Verificar necessidade)
+  
