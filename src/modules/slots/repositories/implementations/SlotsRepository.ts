@@ -2,13 +2,10 @@ import { Slot } from '../../model/Slot';
 import { ISlotsRepository } from '../ISlotsRepository';
 import knex from '../../../../database/db';
 
-
 export class SlotsRepository implements ISlotsRepository {
-
   private static INSTANCE: SlotsRepository;
 
-  private constructor() {
-  }
+  private constructor() {}
   public static getInstance(): SlotsRepository {
     if (!SlotsRepository.INSTANCE) {
       SlotsRepository.INSTANCE = new SlotsRepository();
@@ -17,7 +14,6 @@ export class SlotsRepository implements ISlotsRepository {
   }
 
   async list(): Promise<Slot[]> {
-
     const allSlots: any[] = await knex.raw(`
       SELECT it_agenda_central.cd_it_agenda_central,
         agenda_central.cd_prestador,
@@ -27,7 +23,7 @@ export class SlotsRepository implements ISlotsRepository {
       FROM agenda_central    
       LEFT JOIN dbamv.it_agenda_central ON it_agenda_central.cd_agenda_central= agenda_central.cd_agenda_central
       WHERE sn_ativo = 'S'
-    `)
+    `);
 
     const slots: Slot[] = allSlots.map(slot => ({
       id: slot.CD_IT_AGENDA_CENTRAL,
@@ -39,10 +35,10 @@ export class SlotsRepository implements ISlotsRepository {
       requirement: {
         gender: slot.TIPO,
         minAge: 18,
-        maxAge: 50
-      }
-    }))
+        maxAge: 50,
+      },
+    }));
 
-    return slots
+    return slots;
   }
 }

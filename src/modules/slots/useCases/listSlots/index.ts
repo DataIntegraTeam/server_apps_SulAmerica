@@ -1,6 +1,6 @@
-import { SlotsRepository } from "../../repositories/implementations/SlotsRepository";
-import { ListSlotsController } from "./ListSlotsController";
-import { ListSlotsUseCase } from "./ListSlotsUseCase";
+import { SlotsRepository } from '../../repositories/implementations/SlotsRepository';
+import { ListSlotsController } from './ListSlotsController';
+import { ListSlotsUseCase } from './ListSlotsUseCase';
 
 const slotsRepository = SlotsRepository.getInstance();
 

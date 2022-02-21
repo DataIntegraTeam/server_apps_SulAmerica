@@ -1,10 +1,9 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
-import { ListSlotsUseCase } from "./ListSlotsUseCase";
-
+import { ListSlotsUseCase } from './ListSlotsUseCase';
 
 class ListSlotsController {
-  constructor(private listSlotsUseCase: ListSlotsUseCase) { }
+  constructor(private listSlotsUseCase: ListSlotsUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {
@@ -13,10 +12,10 @@ class ListSlotsController {
       return response.status(200).json(all);
     } catch (error) {
       return response.status(500).json({
-        message: error.message || "Mensagem descrevendo o erro que ocorreu!"
-      })
+        message: error.message || 'Mensagem descrevendo o erro que ocorreu!',
+      });
     }
   }
 }
 
-export { ListSlotsController }
+export { ListSlotsController };
