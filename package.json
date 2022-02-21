@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "start": "nodemon index.js",
-    "build": "rm -rf build/ && prettier --write source/ && tsc"
+    "build": "rm -rf build/ && prettier --write src/ && tsc"
   },
   "dependencies": {
     "body-parser": "^1.19.1",
+    "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "knex": "^1.0.3",
     "nodemon": "^2.0.15",
