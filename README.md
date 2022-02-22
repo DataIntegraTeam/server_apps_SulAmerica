@@ -1,5 +1,5 @@
 # AGENDAMENTO ELETRÔNICO INTEGRADO (SulAmérica)
-### server_apps_SulAmerica
+### server_apps_SulAmerica (Back-End)
 
 
 Rodar API's ```npm run dev```
@@ -12,6 +12,7 @@ Etapas concluídas:
 - Obter Unidades - Ok
 - Obter Profissionais - Ok
 - Obter Agendas Disponíveis - Ok
+- Variavel de Ambiante - Ok
 - Criar Agendamento -
 - Cancelar Agendamento
 - Obter Detalhes de Especialidades (Verificar necessidade)
