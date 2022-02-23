@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class ProfessionalsRepository implements IProfessionalsRepository {
   private static INSTANCE: IProfessionalsRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): ProfessionalsRepository {
     if (!ProfessionalsRepository.INSTANCE) {
       ProfessionalsRepository.INSTANCE = new ProfessionalsRepository();
@@ -37,7 +37,7 @@ export class ProfessionalsRepository implements IProfessionalsRepository {
         state: professional.CD_UF,
         number: professional.NR_DOCUMENTO,
       },
-      photo: professional.HTTPS,
+      photo: `https://${professional.HTTPS}`,
     }));
 
     return professionals;
