@@ -1,11 +1,12 @@
 import { Unit } from '../../model/Unit';
 import { IUnitsRepository } from '../IUnitsRepository';
 import knex from '../../../../database/db';
+import moment from 'moment';
 
 export class UnitsRepository implements IUnitsRepository {
   private static INSTANCE: UnitsRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): UnitsRepository {
     if (!UnitsRepository.INSTANCE) {
       UnitsRepository.INSTANCE = new UnitsRepository();
@@ -46,6 +47,11 @@ export class UnitsRepository implements IUnitsRepository {
       latitude: -23.199437,
       longitude: -46.200313,
       type: unit.TIPO,
+
+      currentData: moment
+        .utc(moment.utc())
+        .local()
+        .format('DD-MM-YYYY HH:mm:ss')
     }));
 
     return units;

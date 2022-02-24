@@ -1,6 +1,7 @@
 import { Professional } from '../../model/Professional';
 import { IProfessionalsRepository } from '../IProfessionalsRepository';
 import knex from '../../../../database/db';
+import moment from 'moment';
 
 export class ProfessionalsRepository implements IProfessionalsRepository {
   private static INSTANCE: IProfessionalsRepository;
@@ -38,6 +39,11 @@ export class ProfessionalsRepository implements IProfessionalsRepository {
         number: professional.NR_DOCUMENTO,
       },
       photo: `https://${professional.HTTPS}`,
+
+      currentData: moment
+        .utc(moment.utc())
+        .local()
+        .format('DD-MM-YYYY HH:mm:ss')
     }));
 
     return professionals;

@@ -1,16 +1,12 @@
 import { Appointment } from '../../model/Appointment';
 import { IAppointmentsRepository } from '../../repositories/IAppointmentsRepository';
 
-type TCreateAppointmentsUseCase = { data: Appointment[] }
-
 class CreateAppointmentsUseCase {
   constructor(private appointmentsRepository: IAppointmentsRepository) { }
 
-  async execute(data: Appointment): Promise<TCreateAppointmentsUseCase> {
-    const appointments = await this.appointmentsRepository.create();
+  async execute(data: Appointment): Promise<void> {
+    await this.appointmentsRepository.create(data);
 
-    const data: TCreateAppointmentsUseCase = { data: appointments }
-    return data;
   }
 }
 

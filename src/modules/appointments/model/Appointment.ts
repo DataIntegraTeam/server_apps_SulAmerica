@@ -1,6 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
 
 class Appointment {
+  id: string;
   slotId: string;
   professionalId: string;
   unitId: string;
