@@ -42,6 +42,8 @@ export class SlotsRepository implements ISlotsRepository {
         minAge: 18,
         maxAge: 50,
       },
+      createAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }));
 
     return slots;

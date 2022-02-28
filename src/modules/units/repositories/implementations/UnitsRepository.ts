@@ -1,7 +1,6 @@
 import { Unit } from '../../model/Unit';
 import { IUnitsRepository } from '../IUnitsRepository';
 import knex from '../../../../database/db';
-import moment from 'moment';
 
 export class UnitsRepository implements IUnitsRepository {
   private static INSTANCE: UnitsRepository;
@@ -48,10 +47,8 @@ export class UnitsRepository implements IUnitsRepository {
       longitude: -46.200313,
       type: unit.TIPO,
 
-      currentData: moment
-        .utc(moment.utc())
-        .local()
-        .format('DD-MM-YYYY HH:mm:ss')
+      createAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }));
 
     return units;

@@ -13,8 +13,8 @@ class CreateAppointmentsController {
       return response.sendStatus(201);
     } catch (error) {
       return response.status(500).json({
-        message: error.message || "Mensagem descrevendo o erro que ocorreu!"
-      })
+        message: error.message || "Mensagem descrevendo o erro que ocorreu em Appointment!"
+      });
     }
   }
 }

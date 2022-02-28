@@ -40,10 +40,8 @@ export class ProfessionalsRepository implements IProfessionalsRepository {
       },
       photo: `https://${professional.HTTPS}`,
 
-      currentData: moment
-        .utc(moment.utc())
-        .local()
-        .format('DD-MM-YYYY HH:mm:ss')
+      createAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }));
 
     return professionals;
