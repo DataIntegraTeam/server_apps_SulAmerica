@@ -46,6 +46,9 @@ export class UnitsRepository implements IUnitsRepository {
       latitude: -23.199437,
       longitude: -46.200313,
       type: unit.TIPO,
+
+      createAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     }));
 
     return units;

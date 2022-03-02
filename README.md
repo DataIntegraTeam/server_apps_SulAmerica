@@ -1,9 +1,9 @@
 # AGENDAMENTO ELETRÔNICO INTEGRADO (SulAmérica)
-### server_apps_SulAmerica
+### server_apps_SulAmerica (Back-End)
 
+Converte os arquivo para Javascript: ```yarn build```.
 
-Rodar API's ```npm run dev```
-
+Rodar API's: ```npm run dev```.
 
 Criando a API com Node.JS.
 
@@ -12,7 +12,8 @@ Etapas concluídas:
 - Obter Unidades - Ok
 - Obter Profissionais - Ok
 - Obter Agendas Disponíveis - Ok
-- Criar Agendamento -
+- Variavel de Ambiante - Ok
+- Criar Agendamento - 50%
 - Cancelar Agendamento
 - Obter Detalhes de Especialidades (Verificar necessidade)
   

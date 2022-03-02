@@ -1,6 +1,7 @@
 import { Professional } from '../../model/Professional';
 import { IProfessionalsRepository } from '../IProfessionalsRepository';
 import knex from '../../../../database/db';
+import moment from 'moment';
 
 export class ProfessionalsRepository implements IProfessionalsRepository {
   private static INSTANCE: IProfessionalsRepository;
@@ -37,7 +38,10 @@ export class ProfessionalsRepository implements IProfessionalsRepository {
         state: professional.CD_UF,
         number: professional.NR_DOCUMENTO,
       },
-      photo: professional.HTTPS,
+      photo: `https://${professional.HTTPS}`,
+
+      createAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     }));
 
     return professionals;

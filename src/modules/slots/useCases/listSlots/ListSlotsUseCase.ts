@@ -6,8 +6,8 @@ type TListSlotsUseCase = { data: Slot[] };
 class ListSlotsUseCase {
   constructor(private slotsRoutes: ISlotsRepository) {}
 
-  async execute(): Promise<TListSlotsUseCase> {
-    const slots = await this.slotsRoutes.list();
+  async execute(date?: string): Promise<TListSlotsUseCase> {
+    const slots = await this.slotsRoutes.list(date);
 
     const data: TListSlotsUseCase = { data: slots };
     return data;
