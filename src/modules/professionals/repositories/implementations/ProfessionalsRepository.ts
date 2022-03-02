@@ -1,12 +1,11 @@
 import { Professional } from '../../model/Professional';
 import { IProfessionalsRepository } from '../IProfessionalsRepository';
 import knex from '../../../../database/db';
-import moment from 'moment';
 
 export class ProfessionalsRepository implements IProfessionalsRepository {
   private static INSTANCE: IProfessionalsRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): ProfessionalsRepository {
     if (!ProfessionalsRepository.INSTANCE) {
       ProfessionalsRepository.INSTANCE = new ProfessionalsRepository();
