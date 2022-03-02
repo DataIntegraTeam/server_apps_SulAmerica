@@ -12,7 +12,9 @@ class ListProfessionalsController {
       return response.status(200).json(all);
     } catch (error) {
       return response.status(500).json({
-        massage: error.message || 'Mensagem descrevendo o erro que ocorreu!',
+        massage:
+          error.message ||
+          'Mensagem descrevendo o erro que ocorreu Professionals!',
       });
     }
   }
