@@ -4,4 +4,4 @@ interface IAppointmentsRepository {
   create(data: Appointment): Promise<void | Error>;
 }
 
-export { IAppointmentsRepository }
+export { IAppointmentsRepository };

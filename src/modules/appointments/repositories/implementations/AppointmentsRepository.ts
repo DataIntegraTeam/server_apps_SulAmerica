@@ -2,12 +2,10 @@ import { Appointment } from '../../model/Appointment';
 import { IAppointmentsRepository } from '../IAppointmentsRepository';
 import knex from '../../../../database/db';
 
-
 export class AppointmentsRepository implements IAppointmentsRepository {
   private static INSTANCE: AppointmentsRepository;
 
-  private constructor() {
-  }
+  private constructor() {}
   public static getInstance(): AppointmentsRepository {
     if (!AppointmentsRepository.INSTANCE) {
       AppointmentsRepository.INSTANCE = new AppointmentsRepository();
@@ -17,7 +15,6 @@ export class AppointmentsRepository implements IAppointmentsRepository {
 
   async create(data: Appointment): Promise<void | Error> {
     try {
-
       // const appointment: any[] = await knex.raw()
 
       // const appointments: Appointment[] = await Appointment.raw(appointment => {
@@ -42,11 +39,11 @@ export class AppointmentsRepository implements IAppointmentsRepository {
 
       // await this.Appointment.save(data);
 
-      new Date().toISOString()
+      new Date().toISOString();
 
       console.log(data, new Date().toISOString());
     } catch (error) {
-      throw new Error("");
+      throw new Error('');
     }
   }
 }

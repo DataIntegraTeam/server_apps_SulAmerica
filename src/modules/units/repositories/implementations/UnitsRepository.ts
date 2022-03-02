@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class UnitsRepository implements IUnitsRepository {
   private static INSTANCE: UnitsRepository;
 
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): UnitsRepository {
     if (!UnitsRepository.INSTANCE) {
       UnitsRepository.INSTANCE = new UnitsRepository();
@@ -48,7 +48,7 @@ export class UnitsRepository implements IUnitsRepository {
       type: unit.TIPO,
 
       createAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     }));
 
     return units;

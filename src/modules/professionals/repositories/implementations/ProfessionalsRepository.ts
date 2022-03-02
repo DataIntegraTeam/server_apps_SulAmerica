@@ -6,7 +6,7 @@ import moment from 'moment';
 export class ProfessionalsRepository implements IProfessionalsRepository {
   private static INSTANCE: IProfessionalsRepository;
 
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): ProfessionalsRepository {
     if (!ProfessionalsRepository.INSTANCE) {
       ProfessionalsRepository.INSTANCE = new ProfessionalsRepository();
@@ -41,7 +41,7 @@ export class ProfessionalsRepository implements IProfessionalsRepository {
       photo: `https://${professional.HTTPS}`,
 
       createAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     }));
 
     return professionals;

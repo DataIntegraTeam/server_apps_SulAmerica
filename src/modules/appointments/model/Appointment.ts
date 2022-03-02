@@ -8,16 +8,16 @@ class Appointment {
   productId: string;
   telemedicine: string;
   patient: {
-    benefitCode: string,
-    phone: string,
-    email: string,
-    name: string,
-    birthDate: Date,
+    benefitCode: string;
+    phone: string;
+    email: string;
+    name: string;
+    birthDate: Date;
     document: {
-      type: string,
-      number: string
-    }
-  }
+      type: string;
+      number: string;
+    };
+  };
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
@@ -25,4 +25,4 @@ class Appointment {
   }
 }
 
-export { Appointment }
+export { Appointment };
