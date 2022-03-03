@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class SlotsRepository implements ISlotsRepository {
   private static INSTANCE: SlotsRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): SlotsRepository {
     if (!SlotsRepository.INSTANCE) {
       SlotsRepository.INSTANCE = new SlotsRepository();
@@ -16,7 +16,7 @@ export class SlotsRepository implements ISlotsRepository {
   async list(date?: string): Promise<Slot[]> {
     let whereDate = '';
     if (date) {
-      whereDate = `and To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') = To_Date('${date}','YYYY-MM-DD')`;
+      whereDate = `AND To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') = To_Date('${date}','YYYY-MM-DD')`;
     }
     const allSlots: any[] = await knex.raw(`
       SELECT it_agenda_central.cd_it_agenda_central,

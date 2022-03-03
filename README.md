@@ -13,7 +13,8 @@ Etapas concluídas:
 - Obter Profissionais - Ok
 - Obter Agendas Disponíveis - Ok
 - Variavel de Ambiante - Ok
-- Criar Agendamento - 60%
-- Cancelar Agendamento
+- Criar Agendamento - 70%
+  - Cancelar Agendamento - 00%
+  - Regras de Negócio Erro - 
 - Obter Detalhes de Especialidades (Verificar necessidade)
   
