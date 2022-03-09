@@ -54,7 +54,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
           '${data.patient.phone}', 
           '${data.patient.email}', 
           '${data.patient.name}', 
-          null, 
+          To_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
           '${data.patient.document.number}')
         `
 
