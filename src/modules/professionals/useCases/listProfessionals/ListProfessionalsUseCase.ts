@@ -4,7 +4,7 @@ import { IProfessionalsRepository } from '../../repositories/IProfessionalsRepos
 type TListProfessionalsUseCase = { data: Professional[] };
 
 class ListProfessionalsUseCase {
-  constructor(private professionalsRoutes: IProfessionalsRepository) {}
+  constructor(private professionalsRoutes: IProfessionalsRepository) { }
 
   async execute(): Promise<TListProfessionalsUseCase> {
     const professionals = await this.professionalsRoutes.list();

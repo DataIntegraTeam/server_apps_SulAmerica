@@ -16,7 +16,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
-      const sql = `INSERT INTO dataintegra.tbl_dti_agendamento (
+      const sql = `INSERT INTO dataintegra.tbl_dti_agendamento SELECT nvl(max(cd_dti_agendamento),0)+1(
         cd_dti_agendamento,
         tp_fluxo,
         tp_status,
@@ -37,7 +37,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         DT_NASCIMENTO, 
         NR_CPF) 
         VALUES 
-        (${data.cd_dti_agendamento},
+        ('${data.cd_dti_agendamento}',
           '${data.tp_fluxo = 'S'}',
           '${data.tp_status = 'A'}',
           '${data.ds_erro = 'null'}',
@@ -46,7 +46,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
           '${data.dt_processado = 'null'}',
           '${data.tp_movimento = 'null'}',
           '${data.cd_multi_empresa = 'null'}',
-          '${data.slotId}', 
+          data.slotId: CD_IT_AGENDA_CENTRAL, 
           '${data.professionalId}', 
           '${data.unitId}', 
           '${data.productId}', 

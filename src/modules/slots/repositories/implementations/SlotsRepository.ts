@@ -31,7 +31,8 @@ export class SlotsRepository implements ISlotsRepository {
     `);
 
     const slots: Slot[] = allSlots.map(slot => ({
-      id: slot.CD_IT_AGENDA_CENTRAL,
+      id: slot.id,
+      slotId: slot.CD_IT_AGENDA_CENTRAL,
       professionalId: slot.CD_PRESTADOR,
       unitId: slot.CD_UNIDADE_ATENDIMENTO,
       productId: 'Identificador do produto, esse padrão SulAmérica.',

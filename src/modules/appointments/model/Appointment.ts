@@ -2,7 +2,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 class Appointment {
   id: string;
-  cd_dti_agendamento: number;
+  cd_dti_agendamento?: number;
   tp_fluxo: string;
   tp_status: string;
   ds_erro: string;

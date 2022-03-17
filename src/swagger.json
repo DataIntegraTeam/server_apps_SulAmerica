@@ -1,0 +1,98 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AGENDAMENTO ELETRÔNICO INTEGRADO (SulAmérica)",
+    "description": "This is an API SulAmérica",
+    "version": "1.0.0",
+    "contact": {
+      "email": "marcelo.a.marcal@hotmail.com"
+    }    
+  },
+  "server":{
+    "url": "http://localhost:8282/api/v1/units"
+  },
+  "paths": {
+     "/api/v1/units": {
+       "post": {
+         "summary": "Create units for test",
+         "description": "Create new units for test",
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "array",
+                 "items": {
+                   "type": "object",
+                   "properties": {
+                     "id": {
+                       "type": "integer"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "shortName": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "properties": {
+                          "postalCode": {
+                            "type": "string"
+                          },
+                          "neighborhood": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          }
+                        }                                
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "descriptionOperation": {
+                        "type": "string"
+                      },
+                      "latitude": {
+                        "type": "number"
+                      },
+                      "longitude": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    }
+                 },
+                 "examples": {
+                  "id": "1",
+                  "name": "Metrô Sacomã",
+                  "shortName": "Sacomã",
+                  "address": {
+                    "postalCode": "04208002",
+                    "neighborhood": "Ipiranga",
+                    "city": "São Paulo",
+                    "state": "SP",
+                    "street": "Rua Silva Bueno, 2201 - Próximo ao terminal Sacomã - Ipiranga"
+                  },
+                  "phone": "1140101210",
+                  "descriptionOperation": "2ª a sábado das 6:55 às 19h",
+                  "latitude": -23.19943700,
+                  "longitude": -46.20031300,
+                  "type": "VIRTUAL"
+                 }                 
+               }
+             }
+           }
+         },
+         "response": {
+           "201": {
+             "description": "Created"
+           }
+         }
+       }
+     }
+  }
+}
