@@ -14,17 +14,31 @@ Etapas concluídas:
 - Obter Agendas Disponíveis - Ok
 - Variavel de Ambiante - Ok
 - Criar Agendamento - Ok
-  - Cancelar Agendamento - 40%
+  - Cancelar Agendamento - 90%
   - Regras de Negócio Erro - 
 - Obter Detalhes de Especialidades (Verificar necessidade)
   
 
-Entendimento:
+## Entendimento.
+  ### Obter Agendas Disponíveis:
   As Agendas Disponíveis vem com um `id`.
-  Esse `id` vai ser usado na criação do agendamento `slotId`.
-  `id` = `slotId`.
+  Esse `id` vai ser usado na criação do agendamento o nome `slotId`.
+  Desta forma `id` = `slotId`.
 
-  Ao Criar Agendamento com `slotId`.
-  Ele vai retorna e salva `appointmentId` que e = `slotId`.
+  ### Criar Agendamento:
+  Ao Criar Agendamento com o id do `slotId`.
+  Ele vai retorna e salva `appointmentId`. 
+  Desta forma `slotId` = `appointmentId`.
 
-  O Cancelar Agendamento ira usar `appointmentId` para adicionar ou salva no campo `reason` o motivo desse canselamento.
+  ### Cancelar Agendamento:
+  O Cancelamento de Agendamento ira usar `appointmentId` para adicionar no campo `reason` o motivo desse canselamento.
+  
+  ### Obter Detalhes de Especialidades:
+  Ficando assim:
+  ```
+  "reason": "SAME_DAY_APPOINTMENT",
+	"patientBenefitCode": "0129B33B2218",
+  ```
+
+  Colocar ou não?
+  "appointmentId": "9875364"

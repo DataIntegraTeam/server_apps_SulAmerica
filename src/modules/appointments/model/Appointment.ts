@@ -11,6 +11,7 @@ class Appointment {
   dt_processado: string;
   tp_movimento: string;
   cd_multi_empresa: string;
+  appointmentId: string;
   slotId: string;
   professionalId: string;
   unitId: string;

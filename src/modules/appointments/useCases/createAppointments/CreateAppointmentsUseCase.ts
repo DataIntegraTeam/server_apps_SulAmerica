@@ -4,16 +4,12 @@ import { IAppointmentsRepository } from '../../repositories/IAppointmentsReposit
 class CreateAppointmentsUseCase {
   constructor(private appointmentsRepository: IAppointmentsRepository) { }
 
-  async execute(data: Appointment): Promise<number> {
-    // data.cd_dti_agendamento = Math.floor(1 + Math.random() + 1);
-    data.cd_dti_agendamento = (data.cd_dti_agendamento = 0 + 1);
-    // data.cd_dti_agendamento
-    // data.cd_dti_agendamento
-    // if (data.cd_dti_agendamento == 0)
+  async execute(data: Appointment): Promise<string> {
 
+    data.appointmentId = data.slotId
     await this.appointmentsRepository.create(data);
 
-    return data.cd_dti_agendamento
+    return data.appointmentId
   }
 }
 

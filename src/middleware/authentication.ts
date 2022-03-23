@@ -11,10 +11,10 @@ function authentication(req: Request, res: Response, next: NextFunction) {
   const auth = Buffer.from(authheader.split(' ')[1], 'base64')
     .toString()
     .split(':');
-  const user = auth[0];
-  const pass = auth[1];
+  const username = auth[0];
+  const password = auth[1];
 
-  if (user == 'admin' && pass == '123') {
+  if (username == 'dWtT!fdQ%Ya&' && password == '!sS6P1&7YS4TxX82wI%tOu*PV7hj') {
     next();
   } else {
     return res.status(401).json({ message: 'unauthorized' });

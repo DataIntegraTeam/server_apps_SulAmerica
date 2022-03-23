@@ -7,9 +7,9 @@ class CreateAppointmentsController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const cd_dti_agendamento = await this.createAppointmentsUseCase.execute(request.body);
+      const appointmentId = await this.createAppointmentsUseCase.execute(request.body);
       // data.slotId
-      return response.status(201).json({ appointmentId: cd_dti_agendamento });
+      return response.status(201).json({ appointmentId });
     } catch (error) {
       return response.status(500).json({
         message:

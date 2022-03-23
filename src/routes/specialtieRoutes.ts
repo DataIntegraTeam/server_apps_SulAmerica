@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { specialtiesController } from '../modules/appointmentId/useCases/specialties';
+import { listSpecialtiesController } from '../modules/specialties/useCases/listSpecialties';
 
 const specialtiesRoutes = Router();
 
 specialtiesRoutes.post('/specialties', (request, response) => {
-  return specialtiesController.handle(request, response);
+  return listSpecialtiesController.handle(request, response);
 });
 
 export { specialtiesRoutes };

@@ -4,7 +4,7 @@ import { unitsRoutes } from './unitsRoutes';
 import { professionalsRoutes } from './professionalsRoutes';
 import { slotsRoutes } from './slotsRoutes';
 import { appointmentsRoutes } from './appointmentsRoutes';
-// import { appointmentIdRoutes } from './appointmentIdRoutes';
+import { cancelingRoutes } from './cancelingRoutes';
 // import { specialtiesRoutes } from './specialtiesRoutes';
 
 import { authentication } from '../middleware/authentication';
@@ -17,7 +17,7 @@ router.use('/api/v1', unitsRoutes);
 router.use('/api/v1', professionalsRoutes);
 router.use('/api/v1', slotsRoutes);
 router.use('/api/v1', appointmentsRoutes);
-// router.use('/api/v1', appointmentIdRoutes);
+router.use('/api/v1', cancelingRoutes);
 // router.use('/api/v1', specialtiesRoutes);
 
 export { router };

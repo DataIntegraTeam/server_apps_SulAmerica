@@ -16,6 +16,9 @@
        "post": {
          "summary": "Create units for test",
          "description": "Create new units for test",
+         "security":{
+           "basicAuth":[]
+         },
          "requestBody": {
            "content": {
              "application/json": {

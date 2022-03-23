@@ -16,7 +16,10 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
-      const sql = `INSERT INTO dataintegra.tbl_dti_agendamento SELECT nvl(max(cd_dti_agendamento),0)+1(
+      const lastAppointment = await knex.raw('SELECT cd_dti_agendamento FROM dataintegra.tbl_dti_agendamento ORDER BY cd_dti_agendamento DESC LIMIT 1')
+      const cdDtiAgendamento = lastAppointment[0].cd_dti_agendamento + 1;
+
+      const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
         cd_dti_agendamento,
         tp_fluxo,
         tp_status,
@@ -26,6 +29,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         dt_processado, 
         tp_movimento,
         cd_multi_empresa,
+        APPOINTMENT_ID,
         CD_AGENDAMENTO_INTEGRA, 
         CD_PRESTADOR, 
         CD_UNID_INT, 
@@ -35,18 +39,19 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         EMAIL, 
         NM_PACIENTE, 
         DT_NASCIMENTO, 
-        NR_CPF) 
+        NR_CPF)        
         VALUES 
-        ('${data.cd_dti_agendamento}',
+        ('${cdDtiAgendamento}',
           '${data.tp_fluxo = 'S'}',
           '${data.tp_status = 'A'}',
           '${data.ds_erro = 'null'}',
-          '${data.dt_gerado = ''}',
+          (${data.dt_gerado = ''}),
           '${data.tp_registro = '001'}',
           '${data.dt_processado = 'null'}',
           '${data.tp_movimento = 'null'}',
           '${data.cd_multi_empresa = 'null'}',
-          data.slotId: CD_IT_AGENDA_CENTRAL, 
+          '${data.appointmentId}',
+          '${data.slotId}', 
           '${data.professionalId}', 
           '${data.unitId}', 
           '${data.productId}', 
