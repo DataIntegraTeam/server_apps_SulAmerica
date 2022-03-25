@@ -1,7 +1,7 @@
 import { TRequestData } from "../useCases/canceling/CancelingUseCase";
 
 interface ICancelingRepository {
-  update(data: TRequestData): Promise<void | Error>;
+  create(data: TRequestData): Promise<void | Error>;
 }
 
 export { ICancelingRepository }

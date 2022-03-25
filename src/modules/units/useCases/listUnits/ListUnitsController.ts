@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { ListUnitsUseCase } from './ListUnitsUseCase';
 
 class ListUnitsController {
-  constructor(private listUnitsUseCase: ListUnitsUseCase) {}
+  constructor(private listUnitsUseCase: ListUnitsUseCase) { }
 
   async handle(request: Request, response: Response): Promise<Response> {
     const date = request.query.date;

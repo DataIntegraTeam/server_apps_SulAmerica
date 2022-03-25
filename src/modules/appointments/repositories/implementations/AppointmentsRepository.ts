@@ -16,9 +16,12 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
-      const lastAppointment = await knex.raw('SELECT cd_dti_agendamento FROM dataintegra.tbl_dti_agendamento ORDER BY cd_dti_agendamento DESC LIMIT 1')
-      const cdDtiAgendamento = lastAppointment[0].cd_dti_agendamento + 1;
-
+      const lastAppointment = await knex.raw('SELECT cd_dti_agendamento FROM dataintegra.tbl_dti_agendamento WHERE ROWNUM = 1 ORDER BY cd_dti_agendamento DESC')
+      let cdDtiAgendamento: number = 1;
+      if (lastAppointment[0]) {
+        cdDtiAgendamento = lastAppointment[0].CD_DTI_AGENDAMENTO + 1;
+      }
+      console.log(lastAppointment);
       const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
         cd_dti_agendamento,
         tp_fluxo,
@@ -29,8 +32,9 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         dt_processado, 
         tp_movimento,
         cd_multi_empresa,
-        APPOINTMENT_ID,
+        reason,
         CD_AGENDAMENTO_INTEGRA, 
+        APPOINTMENT_ID,
         CD_PRESTADOR, 
         CD_UNID_INT, 
         CD_PRODUTO, 
@@ -42,25 +46,26 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         NR_CPF)        
         VALUES 
         ('${cdDtiAgendamento}',
-          '${data.tp_fluxo = 'S'}',
-          '${data.tp_status = 'A'}',
-          '${data.ds_erro = 'null'}',
-          (${data.dt_gerado = ''}),
-          '${data.tp_registro = '001'}',
-          '${data.dt_processado = 'null'}',
-          '${data.tp_movimento = 'null'}',
-          '${data.cd_multi_empresa = 'null'}',
-          '${data.appointmentId}',
-          '${data.slotId}', 
-          '${data.professionalId}', 
-          '${data.unitId}', 
-          '${data.productId}', 
-          '${data.patient.benefitCode}', 
-          '${data.patient.phone}', 
-          '${data.patient.email}', 
-          '${data.patient.name}', 
-          To_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
-          '${data.patient.document.number}')
+        '${data.tp_fluxo = 'S'}',
+        '${data.tp_status = 'A'}',
+        '${data.ds_erro = 'null'}',
+        '${data.dt_gerado = ''}',
+        '${data.tp_registro = '001'}',
+        '${data.dt_processado = 'null'}',
+        '${data.tp_movimento = 'I'}',
+        '${data.cd_multi_empresa = 'null'}',
+        '${data.reason = 'null'}',
+        '${data.appointmentId}',
+        '${data.slotId}', 
+        '${data.professionalId}', 
+        '${data.unitId}', 
+        '${data.productId}', 
+        '${data.patient.benefitCode}', 
+        '${data.patient.phone}', 
+        '${data.patient.email}', 
+        '${data.patient.name}', 
+        To_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
+        '${data.patient.document.number}')
         `
 
       await knex.raw(sql)

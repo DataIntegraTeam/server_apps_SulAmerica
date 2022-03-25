@@ -14,9 +14,9 @@ Etapas concluídas:
 - Obter Agendas Disponíveis - Ok
 - Variavel de Ambiante - Ok
 - Criar Agendamento - Ok
-  - Cancelar Agendamento - 90%
-  - Regras de Negócio Erro - 
-- Obter Detalhes de Especialidades (Verificar necessidade)
+  - Cancelar Agendamento - Ok
+  - Regras de Negócio Erro - 50% 
+- Obter Detalhes de Especialidades 90% (Verificar necessidade)
   
 
 ## Entendimento.
@@ -42,3 +42,12 @@ Etapas concluídas:
 
   Colocar ou não?
   "appointmentId": "9875364"
+
+
+
+```
+      const sql = `UPDATE dataintegra.tbl_dti_agendamento 
+        SET tp_status = 'false', reason = ${data.reason} 
+        WHERE appointment_id = ${data.appointmentId} 
+        AND nr_carteira = ${data.patientBenefitCode}`
+```

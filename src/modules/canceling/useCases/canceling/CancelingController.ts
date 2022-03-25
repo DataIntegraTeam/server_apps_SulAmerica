@@ -7,10 +7,10 @@ class CancelingController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const { appointmentId } = request.params
-    const { reason, patientBenefitCode } = request.body
+    const { reason, patientBenefitCode, tp_status, tp_movimento } = request.body
     try {
       const result = await this.cancelingUseCase.execute({
-        appointmentId, reason, patientBenefitCode
+        appointmentId, reason, patientBenefitCode, tp_status, tp_movimento
       });
 
       return response.status(result.status).json({ message: result.message });
