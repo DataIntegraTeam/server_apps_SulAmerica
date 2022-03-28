@@ -16,7 +16,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
-      const lastAppointment = await knex.raw('SELECT cd_dti_agendamento FROM dataintegra.tbl_dti_agendamento WHERE ROWNUM = 1 ORDER BY cd_dti_agendamento DESC')
+      const lastAppointment = await knex.raw('SELECT cd_dti_agendamento FROM dataintegra.tbl_dti_agendamento ORDER BY cd_dti_agendamento DESC')
       let cdDtiAgendamento: number = 1;
       if (lastAppointment[0]) {
         cdDtiAgendamento = lastAppointment[0].CD_DTI_AGENDAMENTO + 1;
