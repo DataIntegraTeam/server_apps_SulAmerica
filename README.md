@@ -43,11 +43,3 @@ Etapas concluídas:
   Colocar ou não?
   "appointmentId": "9875364"
 
-
-
-```
-      const sql = `UPDATE dataintegra.tbl_dti_agendamento 
-        SET tp_status = 'false', reason = ${data.reason} 
-        WHERE appointment_id = ${data.appointmentId} 
-        AND nr_carteira = ${data.patientBenefitCode}`
-```

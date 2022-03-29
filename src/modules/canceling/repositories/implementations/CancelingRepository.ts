@@ -16,9 +16,9 @@ export class CancelingRepository implements ICancelingRepository {
     console.log(data);
     try {
       await knex.raw(`UPDATE dataintegra.tbl_dti_agendamento 
-      SET tp_status = 'false', reason = '${data.reason}' 
+      SET tp_status = 'T', tp_movimento = 'E', reason = '${data.reason}' 
       WHERE appointment_id = '${data.appointmentId}' 
-      AND nr_carteira = '${data.patientBenefitCode}';`)
+      AND nr_carteira = '${data.patientBenefitCode}'`)
 
     } catch (error) {
       console.error(error)

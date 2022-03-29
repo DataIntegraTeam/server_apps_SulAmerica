@@ -16,12 +16,9 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
-      const lastAppointment = await knex.raw('SELECT cd_dti_agendamento FROM dataintegra.tbl_dti_agendamento ORDER BY cd_dti_agendamento DESC')
-      let cdDtiAgendamento: number = 1;
-      if (lastAppointment[0]) {
-        cdDtiAgendamento = lastAppointment[0].CD_DTI_AGENDAMENTO + 1;
-      }
-      console.log(lastAppointment);
+      const seq_agenda = await knex.raw(`SELECT dataintegra.seq_dti_agendamento.nextval seq_dti from dual`);
+
+      console.log(seq_agenda[0].SEQ_DTI);
       const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
         cd_dti_agendamento,
         tp_fluxo,
@@ -45,7 +42,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         DT_NASCIMENTO, 
         NR_CPF)        
         VALUES 
-        ('${cdDtiAgendamento}',
+        ('${seq_agenda[0].SEQ_DTI}',
         '${data.tp_fluxo = 'S'}',
         '${data.tp_status = 'A'}',
         '${data.ds_erro = 'null'}',
