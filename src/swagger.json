@@ -13,7 +13,7 @@
   },
   "paths": {
      "/api/v1/units": {
-       "post": {
+       "get": {
          "summary": "Create units for test",
          "description": "Create new units for test",
          "security":{
@@ -97,5 +97,79 @@
          }
        }
      }
+  },
+  "server":{
+    "url": "http://localhost:8282/api/v1/professionals"
+  },
+  "paths": {
+    "/api/v1/professionals": {
+      "get": {
+        "summary": "Create units for test",
+        "description": "Create new units for test",
+        "security":{
+          "basicAuth":[]
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                     },
+                     "unitId": {
+                       "type": "string"
+                     },
+                     "name": {
+                       "type": "string"
+                     },
+                     "document": {
+                       "type": {
+                         "state": {
+                           "type": "string"
+                         },
+                         "number": {
+                           "type": "string"
+                         }                         
+                       }                                
+                     },
+                     "phone": {
+                       "type": "string"
+                     },
+                     "createAt": {
+                       "type": "string"
+                     },
+                     "updatedAt": {
+                       "type": "number"
+                     }                     
+                   }
+                },
+                "examples": {
+                  "id": 2,
+                  "unitId": null,
+                  "name": "ENFERMAGEM PREOP - HISTORICO",
+                  "document": {
+                    "type": "COREN - BA",
+                    "state": "BA",
+                    "number": null
+                  },
+                  "photo": "https://undefined",
+                  "createAt": "2022-03-29T12:10:19.294Z",
+                  "updatedAt": "2022-03-29T12:10:19.294Z"
+                }                 
+              }
+            }
+          }
+        },
+        "response": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    }
   }
 }

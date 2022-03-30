@@ -17,7 +17,12 @@ export class AppointmentsRepository implements IAppointmentsRepository {
     console.log(data);
     try {
       const seq_agenda = await knex.raw(`SELECT dataintegra.seq_dti_agendamento.nextval seq_dti from dual`);
-
+      // if (!cd_agendamento_integra || cd_agendamento_integra.length === 0) { 
+      //   return {
+      //     result: 'OK',
+      //     debug_msg: 'slotNotAvailable',
+      //   };
+      // }
       console.log(seq_agenda[0].SEQ_DTI);
       const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
         cd_dti_agendamento,
