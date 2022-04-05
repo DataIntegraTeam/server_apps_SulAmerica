@@ -16,7 +16,7 @@ export class SlotsRepository implements ISlotsRepository {
   async list(date?: string): Promise<Slot[]> {
     let whereDate = '';
     if (date) {
-      whereDate = `and To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') = To_Date('${date}','YYYY-MM-DD')`;
+      whereDate = `AND To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') = To_Date('${date}','YYYY-MM-DD')`;
     }
     const allSlots: any[] = await knex.raw(`
       SELECT it_agenda_central.cd_it_agenda_central,
@@ -31,7 +31,8 @@ export class SlotsRepository implements ISlotsRepository {
     `);
 
     const slots: Slot[] = allSlots.map(slot => ({
-      id: slot.CD_IT_AGENDA_CENTRAL,
+      id: slot.id,
+      slotId: slot.CD_IT_AGENDA_CENTRAL,
       professionalId: slot.CD_PRESTADOR,
       unitId: slot.CD_UNIDADE_ATENDIMENTO,
       productId: 'Identificador do produto, esse padrão SulAmérica.',

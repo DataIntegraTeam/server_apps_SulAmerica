@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class AppointmentsRepository implements IAppointmentsRepository {
   private static INSTANCE: AppointmentsRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): AppointmentsRepository {
     if (!AppointmentsRepository.INSTANCE) {
       AppointmentsRepository.INSTANCE = new AppointmentsRepository();
@@ -14,35 +14,69 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   }
 
   async create(data: Appointment): Promise<void | Error> {
+    console.log(data);
     try {
-      // const appointment: any[] = await knex.raw()
+      const seq_agenda = await knex.raw(
+        `SELECT dataintegra.seq_dti_agendamento.nextval seq_dti from dual`,
+      );
+      // if (!cd_agendamento_integra || cd_agendamento_integra.length === 0) {
+      //   return {
+      //     result: 'OK',
+      //     debug_msg: 'slotNotAvailable',
+      //   };
+      // }
+      console.log(seq_agenda[0].SEQ_DTI);
+      const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
+        cd_dti_agenda,
+        tp_fluxo,
+        tp_status,
+        ds_erro,
+        dt_gerado,
+        tp_registro,
+        dt_processado, 
+        tp_movimento,
+        cd_multi_empresa,
+        ds_cancelamento,
+        cd_it_agenda_central,
+        CD_AGENDAMENTO_INTEGRA, 
+        CD_PRESTADOR, 
+        CD_UNIDADE_ATENDIMENTO, 
+        CD_PRODUTO,
+        SN_TELEMEDICINA, 
+        NR_CARTEIRA, 
+        NR_FONE, 
+        EMAIL, 
+        NM_PACIENTE, 
+        DT_NASCIMENTO, 
+        NR_CPF)        
+        VALUES 
+        ('${seq_agenda[0].SEQ_DTI}',
+        '${(data.tp_fluxo = 'S')}',
+        '${(data.tp_status = 'A')}',
+        '${(data.ds_erro = 'null')}',
+        '${(data.dt_gerado = '')}',
+        '${(data.tp_registro = '001')}',
+        '${(data.dt_processado = 'null')}',
+        '${(data.tp_movimento = 'I')}',
+        '${(data.cd_multi_empresa = 'null')}',
+        '${(data.reason = 'null')}',
+        '${data.appointmentId}',
+        '${data.slotId}', 
+        '${data.professionalId}', 
+        '${data.unitId}', 
+        '${data.productId}',
+        '${data.telemedicine}',
+        '${data.patient.benefitCode}', 
+        '${data.patient.phone}', 
+        '${data.patient.email}', 
+        '${data.patient.name}', 
+        to_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
+        '${data.patient.document.number}')
+        `;
 
-      // const appointments: Appointment[] = await Appointment.raw(appointment => {
-      //   id: "";
-      //   slotId: appointment.CD_AGENDAMENTO_INTEGRA;
-      //   professionalId: appointment.CD_PRESTADOR;
-      //   unitId: appointment.CD_UNID_INT;
-      //   productId: appointment.CD_PRODUTO;
-      //   telemedicine: true;
-      //   patient: {
-      //     benefitCode: appointment.NR_CARTEIRA;
-      //     phone: appointment.NR_FONE;
-      //     email: appointment.EMAIL;
-      //     name: appointment.NM_PACIENTE;
-      //     birthDate: appointment.DT_NASCIMENTO;
-      //     document: {
-      //       type: "CPF";
-      //       number: appointment.NR_CPF
-      //     }
-      //   }
-      // })
-
-      // await this.Appointment.save(data);
-
-      new Date().toISOString();
-
-      console.log(data, new Date().toISOString());
+      await knex.raw(sql);
     } catch (error) {
+      console.error(error);
       throw new Error('');
     }
   }

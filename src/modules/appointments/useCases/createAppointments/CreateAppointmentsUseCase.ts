@@ -4,8 +4,11 @@ import { IAppointmentsRepository } from '../../repositories/IAppointmentsReposit
 class CreateAppointmentsUseCase {
   constructor(private appointmentsRepository: IAppointmentsRepository) {}
 
-  async execute(data: Appointment): Promise<void> {
+  async execute(data: Appointment): Promise<string> {
+    data.appointmentId = data.slotId;
     await this.appointmentsRepository.create(data);
+
+    return data.appointmentId;
   }
 }
 
