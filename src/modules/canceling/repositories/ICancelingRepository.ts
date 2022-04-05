@@ -1,7 +1,7 @@
-import { TRequestData } from "../useCases/canceling/CancelingUseCase";
+import { TRequestData } from '../useCases/canceling/CancelingUseCase';
 
 interface ICancelingRepository {
   create(data: TRequestData): Promise<void | Error>;
 }
 
-export { ICancelingRepository }
+export { ICancelingRepository };

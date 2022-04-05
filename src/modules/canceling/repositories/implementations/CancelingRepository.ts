@@ -4,7 +4,7 @@ import { TRequestData } from '../../useCases/canceling/CancelingUseCase';
 
 export class CancelingRepository implements ICancelingRepository {
   private static INSTANCE: CancelingRepository;
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): CancelingRepository {
     if (!CancelingRepository.INSTANCE) {
       CancelingRepository.INSTANCE = new CancelingRepository();
@@ -16,12 +16,13 @@ export class CancelingRepository implements ICancelingRepository {
     console.log(data);
     try {
       await knex.raw(`UPDATE dataintegra.tbl_dti_agendamento 
-      SET tp_status = 'T', tp_movimento = 'E', reason = '${data.reason}' 
-      WHERE appointment_id = '${data.appointmentId}' 
-      AND nr_carteira = '${data.patientBenefitCode}'`)
-
+      SET tp_status = 'A', 
+      tp_movimento = 'E', 
+      ds_cancelamento = '${data.reason}' 
+      WHERE cd_it_agenda_central = '${data.appointmentId}' 
+      AND nr_carteira = '${data.patientBenefitCode}'`);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       throw new Error('');
     }
   }

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { ListSpecialtiesUseCase } from './ListSpecialtiesUseCase';
 
 class ListSpecialtiesController {
-  constructor(private listSpecialtiesUseCase: ListSpecialtiesUseCase) { }
+  constructor(private listSpecialtiesUseCase: ListSpecialtiesUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {

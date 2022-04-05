@@ -16,8 +16,10 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
-      const seq_agenda = await knex.raw(`SELECT dataintegra.seq_dti_agendamento.nextval seq_dti from dual`);
-      // if (!cd_agendamento_integra || cd_agendamento_integra.length === 0) { 
+      const seq_agenda = await knex.raw(
+        `SELECT dataintegra.seq_dti_agendamento.nextval seq_dti from dual`,
+      );
+      // if (!cd_agendamento_integra || cd_agendamento_integra.length === 0) {
       //   return {
       //     result: 'OK',
       //     debug_msg: 'slotNotAvailable',
@@ -25,7 +27,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
       // }
       console.log(seq_agenda[0].SEQ_DTI);
       const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
-        cd_dti_agendamento,
+        cd_dti_agenda,
         tp_fluxo,
         tp_status,
         ds_erro,
@@ -34,12 +36,13 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         dt_processado, 
         tp_movimento,
         cd_multi_empresa,
-        reason,
+        ds_cancelamento,
+        cd_it_agenda_central,
         CD_AGENDAMENTO_INTEGRA, 
-        APPOINTMENT_ID,
         CD_PRESTADOR, 
-        CD_UNID_INT, 
-        CD_PRODUTO, 
+        CD_UNIDADE_ATENDIMENTO, 
+        CD_PRODUTO,
+        SN_TELEMEDICINA, 
         NR_CARTEIRA, 
         NR_FONE, 
         EMAIL, 
@@ -48,31 +51,32 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         NR_CPF)        
         VALUES 
         ('${seq_agenda[0].SEQ_DTI}',
-        '${data.tp_fluxo = 'S'}',
-        '${data.tp_status = 'A'}',
-        '${data.ds_erro = 'null'}',
-        '${data.dt_gerado = ''}',
-        '${data.tp_registro = '001'}',
-        '${data.dt_processado = 'null'}',
-        '${data.tp_movimento = 'I'}',
-        '${data.cd_multi_empresa = 'null'}',
-        '${data.reason = 'null'}',
+        '${(data.tp_fluxo = 'S')}',
+        '${(data.tp_status = 'A')}',
+        '${(data.ds_erro = 'null')}',
+        '${(data.dt_gerado = '')}',
+        '${(data.tp_registro = '001')}',
+        '${(data.dt_processado = 'null')}',
+        '${(data.tp_movimento = 'I')}',
+        '${(data.cd_multi_empresa = 'null')}',
+        '${(data.reason = 'null')}',
         '${data.appointmentId}',
         '${data.slotId}', 
         '${data.professionalId}', 
         '${data.unitId}', 
-        '${data.productId}', 
+        '${data.productId}',
+        '${data.telemedicine}',
         '${data.patient.benefitCode}', 
         '${data.patient.phone}', 
         '${data.patient.email}', 
         '${data.patient.name}', 
-        To_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
+        to_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
         '${data.patient.document.number}')
-        `
+        `;
 
-      await knex.raw(sql)
+      await knex.raw(sql);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       throw new Error('');
     }
   }

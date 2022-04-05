@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class SpecialtiesRepository implements ISpecialtiesRepository {
   private static INSTANCE: ISpecialtiesRepository;
 
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): SpecialtiesRepository {
     if (!SpecialtiesRepository.INSTANCE) {
       SpecialtiesRepository.INSTANCE = new SpecialtiesRepository();

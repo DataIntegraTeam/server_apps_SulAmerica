@@ -4,7 +4,7 @@ import { ISpecialtiesRepository } from '../../repositories/ISpecialtiesRepositor
 type TListSpecialtiesUseCase = { data: Specialtie[] };
 
 class ListSpecialtiesUseCase {
-  constructor(private specialtiesRoutes: ISpecialtiesRepository) { }
+  constructor(private specialtiesRoutes: ISpecialtiesRepository) {}
 
   async execute(): Promise<TListSpecialtiesUseCase> {
     const specialties = await this.specialtiesRoutes.list();

@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class SlotsRepository implements ISlotsRepository {
   private static INSTANCE: SlotsRepository;
 
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): SlotsRepository {
     if (!SlotsRepository.INSTANCE) {
       SlotsRepository.INSTANCE = new SlotsRepository();

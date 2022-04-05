@@ -1,7 +1,6 @@
-import { CancelingRepository } from "../../repositories/implementations/CancelingRepository";
-import { CancelingController } from "./CancelingController";
-import { CancelingUseCase } from "./CancelingUseCase";
-
+import { CancelingRepository } from '../../repositories/implementations/CancelingRepository';
+import { CancelingController } from './CancelingController';
+import { CancelingUseCase } from './CancelingUseCase';
 
 const cancelingRepository = CancelingRepository.getInstance();
 

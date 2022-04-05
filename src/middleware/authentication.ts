@@ -14,7 +14,10 @@ function authentication(req: Request, res: Response, next: NextFunction) {
   const username = auth[0];
   const password = auth[1];
 
-  if (username == 'dWtT!fdQ%Ya&' && password == '!sS6P1&7YS4TxX82wI%tOu*PV7hj') {
+  if (
+    username == 'dWtT!fdQ%Ya&' &&
+    password == '!sS6P1&7YS4TxX82wI%tOu*PV7hj'
+  ) {
     next();
   } else {
     return res.status(401).json({ message: 'unauthorized' });

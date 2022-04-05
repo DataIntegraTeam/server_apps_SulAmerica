@@ -16,7 +16,7 @@ Etapas concluídas:
 - Criar Agendamento - Ok
   - Cancelar Agendamento - Ok
   - Regras de Negócio Erro - 50% 
-- Obter Detalhes de Especialidades 90% (Verificar necessidade)
+- Obter Detalhes de Especialidades 90% (Não sera usado no momento)
   
 
 ## Entendimento.
@@ -27,11 +27,11 @@ Etapas concluídas:
 
   ### Criar Agendamento:
   Ao Criar Agendamento com o id do `slotId`.
-  Ele vai retorna e salva `appointmentId`. 
-  Desta forma `slotId` = `appointmentId`.
+  Ele vai gera e retorna salvo o `appointmentId`. 
+  Desta forma sera criado um agendamento com id `appointmentId`.
 
   ### Cancelar Agendamento:
-  O Cancelamento de Agendamento ira usar `appointmentId` para adicionar no campo `reason` o motivo desse canselamento.
+  O Cancelamento do Agendamento ira usar `patientBenefitCode` era ira passar o como params o `appointmentId` na rota.
   
   ### Obter Detalhes de Especialidades:
   Ficando assim:

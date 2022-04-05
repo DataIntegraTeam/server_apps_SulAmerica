@@ -6,70 +6,70 @@
     "version": "1.0.0",
     "contact": {
       "email": "marcelo.a.marcal@hotmail.com"
-    }    
+    }
   },
-  "server":{
+  "server": {
     "url": "http://localhost:8282/api/v1/units"
   },
   "paths": {
-     "/api/v1/units": {
-       "get": {
-         "summary": "Create units for test",
-         "description": "Create new units for test",
-         "security":{
-           "basicAuth":[]
-         },
-         "requestBody": {
-           "content": {
-             "application/json": {
-               "schema": {
-                 "type": "array",
-                 "items": {
-                   "type": "object",
-                   "properties": {
-                     "id": {
-                       "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "shortName": {
-                        "type": "string"
-                      },
-                      "address": {
-                        "properties": {
-                          "postalCode": {
-                            "type": "string"
-                          },
-                          "neighborhood": {
-                            "type": "string"
-                          },
-                          "city": {
-                            "type": "string"
-                          },
-                          "state": {
-                            "type": "string"
-                          }
-                        }                                
-                      },
-                      "phone": {
-                        "type": "string"
-                      },
-                      "descriptionOperation": {
-                        "type": "string"
-                      },
-                      "latitude": {
-                        "type": "number"
-                      },
-                      "longitude": {
-                        "type": "number"
-                      },
-                      "type": {
-                        "type": "string"
+    "/api/v1/units": {
+      "get": {
+        "summary": "Create units for test",
+        "description": "Create new units for test",
+        "security": {
+          "basicAuth": []
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "shortName": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "properties": {
+                        "postalCode": {
+                          "type": "string"
+                        },
+                        "neighborhood": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        }
                       }
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "descriptionOperation": {
+                      "type": "string"
+                    },
+                    "latitude": {
+                      "type": "number"
+                    },
+                    "longitude": {
+                      "type": "number"
+                    },
+                    "type": {
+                      "type": "string"
                     }
-                 },
-                 "examples": {
+                  }
+                },
+                "examples": {
                   "id": "1",
                   "name": "Metrô Sacomã",
                   "shortName": "Sacomã",
@@ -82,23 +82,23 @@
                   },
                   "phone": "1140101210",
                   "descriptionOperation": "2ª a sábado das 6:55 às 19h",
-                  "latitude": -23.19943700,
-                  "longitude": -46.20031300,
+                  "latitude": -23.199437,
+                  "longitude": -46.200313,
                   "type": "VIRTUAL"
-                 }                 
-               }
-             }
-           }
-         },
-         "response": {
-           "201": {
-             "description": "Created"
-           }
-         }
-       }
-     }
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    }
   },
-  "server":{
+  "server": {
     "url": "http://localhost:8282/api/v1/professionals"
   },
   "paths": {
@@ -106,8 +106,8 @@
       "get": {
         "summary": "Create units for test",
         "description": "Create new units for test",
-        "security":{
-          "basicAuth":[]
+        "security": {
+          "basicAuth": []
         },
         "requestBody": {
           "content": {
@@ -119,33 +119,33 @@
                   "properties": {
                     "id": {
                       "type": "integer"
-                     },
-                     "unitId": {
-                       "type": "string"
-                     },
-                     "name": {
-                       "type": "string"
-                     },
-                     "document": {
-                       "type": {
-                         "state": {
-                           "type": "string"
-                         },
-                         "number": {
-                           "type": "string"
-                         }                         
-                       }                                
-                     },
-                     "phone": {
-                       "type": "string"
-                     },
-                     "createAt": {
-                       "type": "string"
-                     },
-                     "updatedAt": {
-                       "type": "number"
-                     }                     
-                   }
+                    },
+                    "unitId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "document": {
+                      "type": {
+                        "state": {
+                          "type": "string"
+                        },
+                        "number": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "createAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "number"
+                    }
+                  }
                 },
                 "examples": {
                   "id": 2,
@@ -159,7 +159,7 @@
                   "photo": "https://undefined",
                   "createAt": "2022-03-29T12:10:19.294Z",
                   "updatedAt": "2022-03-29T12:10:19.294Z"
-                }                 
+                }
               }
             }
           }
