@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class AppointmentsRepository implements IAppointmentsRepository {
   private static INSTANCE: AppointmentsRepository;
 
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): AppointmentsRepository {
     if (!AppointmentsRepository.INSTANCE) {
       AppointmentsRepository.INSTANCE = new AppointmentsRepository();
@@ -16,15 +16,25 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
+      let [result] = await knex.raw(
+        `SELECT cd_dti_agenda FROM dataintegra.tbl_dti_agendamento WHERE CD_AGENDAMENTO_INTEGRA = ${data.slotId}`,
+      );
+      console.log(result);
+      if (result) {
+        throw new Error('slotNotAvailable');
+      }
+
+      [result] = await knex.raw(
+        `SELECT cd_dti_agenda FROM dataintegra.tbl_dti_agendamento WHERE cd_produto = '${data.productId}' AND nr_carteira = '${data.patient.benefitCode}'`,
+      );
+      if (result) {
+        throw new Error('forbiddenAppointment');
+      }
+
       const seq_agenda = await knex.raw(
         `SELECT dataintegra.seq_dti_agendamento.nextval seq_dti from dual`,
       );
-      // if (!cd_agendamento_integra || cd_agendamento_integra.length === 0) {
-      //   return {
-      //     result: 'OK',
-      //     debug_msg: 'slotNotAvailable',
-      //   };
-      // }
+
       console.log(seq_agenda[0].SEQ_DTI);
       const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
         cd_dti_agenda,
@@ -54,7 +64,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         '${(data.tp_fluxo = 'S')}',
         '${(data.tp_status = 'A')}',
         '${(data.ds_erro = 'null')}',
-        '${(data.dt_gerado = '')}',
+        to_Date('${new Date().toISOString().split('T')[0]}','YYYY-MM-DD'),
         '${(data.tp_registro = '001')}',
         '${(data.dt_processado = 'null')}',
         '${(data.tp_movimento = 'I')}',
@@ -77,7 +87,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
       await knex.raw(sql);
     } catch (error) {
       console.error(error);
-      throw new Error('');
+      throw new Error(error.message);
     }
   }
 }
