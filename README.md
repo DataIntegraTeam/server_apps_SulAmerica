@@ -15,7 +15,7 @@ Etapas concluídas:
 - Variavel de Ambiante - Ok
 - Criar Agendamento - Ok
   - Cancelar Agendamento - Ok
-  - Regras de Negócio Erro - 50% 
+  - Regras de Negócio Erro - Ok 
 - Obter Detalhes de Especialidades 90% (Não sera usado no momento)
   
 
