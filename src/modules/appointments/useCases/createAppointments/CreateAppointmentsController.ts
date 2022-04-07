@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { CreateAppointmentsUseCase } from './CreateAppointmentsUseCase';
 
 class CreateAppointmentsController {
-  constructor(private createAppointmentsUseCase: CreateAppointmentsUseCase) {}
+  constructor(private createAppointmentsUseCase: CreateAppointmentsUseCase) { }
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {
@@ -13,7 +13,6 @@ class CreateAppointmentsController {
 
       return response.status(201).json({ appointmentId });
     } catch (error) {
-      console.log('Aquiiiiii', error.message);
       return response.status(500).json({
         message:
           error.message ||
