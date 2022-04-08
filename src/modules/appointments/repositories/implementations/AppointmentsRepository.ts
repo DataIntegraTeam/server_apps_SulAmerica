@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class AppointmentsRepository implements IAppointmentsRepository {
   private static INSTANCE: AppointmentsRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): AppointmentsRepository {
     if (!AppointmentsRepository.INSTANCE) {
       AppointmentsRepository.INSTANCE = new AppointmentsRepository();
@@ -63,15 +63,15 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         ('${seq_agenda[0].SEQ_DTI}',
         '${(data.tp_fluxo = 'S')}',
         '${(data.tp_status = 'A')}',
-        '${(data.ds_erro = 'null')}',
+        '${(data.ds_erro)}',
         to_Date('${new Date().toISOString().split('T')[0]}','YYYY-MM-DD'),
         '${(data.tp_registro = '001')}',
-        '${(data.dt_processado = 'null')}',
+        '${(data.dt_processado)}',
         '${(data.tp_movimento = 'I')}',
-        '${(data.cd_multi_empresa = 'null')}',
-        '${(data.reason = 'null')}',
-        '${data.appointmentId}',
+        '${data.cd_multi_empresa}',
+        '${data.reason}',
         '${data.slotId}', 
+        '${data.appointmentId}',
         '${data.professionalId}', 
         '${data.unitId}', 
         '${data.productId}',
@@ -83,8 +83,19 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         to_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
         '${data.patient.document.number}')
         `;
+      await knex.raw(sql)
 
-      await knex.raw(sql);
+      let result_func_agenda = await knex.raw(
+        `DECLARE
+        P_RESULT NUMBER;
+        BEGIN DATAINTEGRA.PRC_DTI_AGENDAMENTO(P_RESULT);
+        DBMS_OUTPUT.put_line(P_RESULT);
+          END;
+        `,
+      );
+
+      console.log(result_func_agenda);
+
     } catch (error) {
       console.error(error);
       throw new Error(error.message);
