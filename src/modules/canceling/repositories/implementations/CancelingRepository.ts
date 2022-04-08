@@ -4,7 +4,7 @@ import { TRequestData } from '../../useCases/canceling/CancelingUseCase';
 
 export class CancelingRepository implements ICancelingRepository {
   private static INSTANCE: CancelingRepository;
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): CancelingRepository {
     if (!CancelingRepository.INSTANCE) {
       CancelingRepository.INSTANCE = new CancelingRepository();
@@ -15,12 +15,45 @@ export class CancelingRepository implements ICancelingRepository {
   async create(data: TRequestData): Promise<void | Error> {
     console.log(data);
     try {
-      await knex.raw(`UPDATE dataintegra.tbl_dti_agendamento 
-      SET tp_status = 'A', 
-      tp_movimento = 'E', 
-      ds_cancelamento = '${data.reason}' 
-      WHERE cd_it_agenda_central = '${data.appointmentId}' 
-      AND nr_carteira = '${data.patientBenefitCode}'`);
+      const seq_agenda = await knex.raw(
+        `SELECT dataintegra.seq_dti_agendamento.nextval seq_dti from dual`,
+      );
+
+      console.log(seq_agenda[0].SEQ_DTI);
+      const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
+        cd_dti_agenda, 
+        tp_status, 
+        tp_movimento, 
+        ds_cancelamento, 
+        cd_it_agenda_central, 
+        nr_carteira)
+        VALUES
+        ('${seq_agenda[0].SEQ_DTI}',
+        '${(data.tp_status = 'A')}',
+        '${(data.tp_movimento = 'E')}',
+        '${data.reason}',
+        '${data.appointmentId}',
+        '${data.patientBenefitCode}')
+      `;
+
+      await knex.raw(sql)
+
+      const result_func_canceling = await knex.raw(
+        `
+        DECLARE
+        P_RESULT NUMBER;
+        BEGIN DATAINTEGRA.PRC_DTI_AGENDAMENTO(P_RESULT);
+        DBMS_OUTPUT.put_line(P_RESULT);
+          END;
+        `,
+      )
+
+      console.log(result_func_canceling[0]);
+      console.log(seq_agenda);
+      if (result_func_canceling[0] == '0') {
+        throw new Error('Não foi possivel cancela o horario!');
+      }
+
     } catch (error) {
       console.error(error);
       throw new Error('');
