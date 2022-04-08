@@ -2,7 +2,6 @@ import { v4 as uuidV4 } from 'uuid';
 
 class Revenue {
   id: string;
-  // revenueId: string;
   cd_dti_beneficiario?: number;
   ds_erro: string;
   dt_gerado: Date;

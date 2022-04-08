@@ -42,9 +42,15 @@ Etapas concluídas:
   ### Faturamento de Parceiros: revenues
   
 Rodar no servido:
+
 1 - OBS: Para o Node Ctrl + C antes de iniciar pm2:
+
 2 - `cd dist`.
+
 3 - `npm install`.
+
 4 - `npm install pm2 -g`.
+
 5 - `pm2 start server.js`.
+
 6 - `pm2 logs`.
