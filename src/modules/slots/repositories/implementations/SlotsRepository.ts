@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class SlotsRepository implements ISlotsRepository {
   private static INSTANCE: SlotsRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): SlotsRepository {
     if (!SlotsRepository.INSTANCE) {
       SlotsRepository.INSTANCE = new SlotsRepository();
@@ -27,6 +27,7 @@ export class SlotsRepository implements ISlotsRepository {
       FROM agenda_central    
       LEFT JOIN dbamv.it_agenda_central ON it_agenda_central.cd_agenda_central= agenda_central.cd_agenda_central
       WHERE sn_ativo = 'S'
+      AND nm_paciente IS NULL 
      ${whereDate}
     `);
 
