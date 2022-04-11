@@ -22,7 +22,8 @@ export class CancelingRepository implements ICancelingRepository {
       console.log(seq_agenda[0].SEQ_DTI);
       const sql = `INSERT INTO dataintegra.tbl_dti_agendamento(
         cd_dti_agenda, 
-        tp_status, 
+        tp_status,
+        dt_gerado, 
         tp_movimento, 
         ds_cancelamento, 
         cd_it_agenda_central, 
@@ -30,6 +31,7 @@ export class CancelingRepository implements ICancelingRepository {
         VALUES
         ('${seq_agenda[0].SEQ_DTI}',
         '${(data.tp_status = 'A')}',
+        to_Date('${new Date().toISOString().split('T')[0]}','YYYY-MM-DD'),
         '${(data.tp_movimento = 'E')}',
         '${data.reason}',
         '${data.appointmentId}',
@@ -50,7 +52,7 @@ export class CancelingRepository implements ICancelingRepository {
 
       console.log(result_func_canceling[0]);
       console.log(seq_agenda);
-      if (result_func_canceling[0] == '0') {
+      if (result_func_canceling[0] !== '0') {
         throw new Error('Não foi possivel cancela o horario!');
       }
 
