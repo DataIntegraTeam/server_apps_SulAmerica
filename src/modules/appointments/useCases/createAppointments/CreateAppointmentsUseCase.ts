@@ -1,9 +1,8 @@
 import { Appointment } from '../../model/Appointment';
 import { IAppointmentsRepository } from '../../repositories/IAppointmentsRepository';
-import crypto from 'crypto';
 
 class CreateAppointmentsUseCase {
-  constructor(private appointmentsRepository: IAppointmentsRepository) {}
+  constructor(private appointmentsRepository: IAppointmentsRepository) { }
 
   async execute(data: Appointment): Promise<string | Error> {
     const date = new Date(data.patient.birthDate);
@@ -12,7 +11,7 @@ class CreateAppointmentsUseCase {
     if (!(result >= 18 && result <= 50)) {
       throw new Error('preRequisiteAppointment');
     }
-    data.appointmentId = String(crypto.randomInt(10000, 9000000));
+    data.appointmentId = data.slotId;
     await this.appointmentsRepository.create(data);
 
     return data.appointmentId;
