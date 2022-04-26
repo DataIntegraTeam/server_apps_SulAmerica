@@ -38,7 +38,7 @@ export class CancelingRepository implements ICancelingRepository {
         '${data.patientBenefitCode}')
       `;
 
-      await knex.raw(sql)
+      await knex.raw(sql);
 
       const result_func_canceling = await knex.raw(
         `
@@ -48,14 +48,13 @@ export class CancelingRepository implements ICancelingRepository {
         DBMS_OUTPUT.put_line(P_RESULT);
           END;
         `,
-      )
+      );
 
-      console.log(result_func_canceling[0]);
+      console.log(result_func_canceling);
       console.log(seq_agenda);
-      if (result_func_canceling[0] !== '0') {
+      if (result_func_canceling == '0') {
         throw new Error('Não foi possivel cancela o horario!');
       }
-
     } catch (error) {
       console.error(error);
       throw new Error('');
