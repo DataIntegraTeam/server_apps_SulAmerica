@@ -2,7 +2,7 @@ import { Appointment } from '../../model/Appointment';
 import { IAppointmentsRepository } from '../../repositories/IAppointmentsRepository';
 
 class CreateAppointmentsUseCase {
-  constructor(private appointmentsRepository: IAppointmentsRepository) { }
+  constructor(private appointmentsRepository: IAppointmentsRepository) {}
 
   async execute(data: Appointment): Promise<string | Error> {
     const date = new Date(data.patient.birthDate);

@@ -20,14 +20,14 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         `SELECT cd_dti_agenda FROM dataintegra.tbl_dti_agendamento WHERE CD_AGENDAMENTO_INTEGRA = ${data.slotId}`,
       );
       console.log(result);
-      if (result) {
+      if (!result) {
         throw new Error('slotNotAvailable');
       }
 
       [result] = await knex.raw(
         `SELECT cd_dti_agenda FROM dataintegra.tbl_dti_agendamento WHERE cd_produto = '${data.productId}' AND nr_carteira = '${data.patient.benefitCode}'`,
       );
-      if (result) {
+      if (!result) {
         throw new Error('forbiddenAppointment');
       }
 
@@ -63,10 +63,10 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         ('${seq_agenda[0].SEQ_DTI}',
         '${(data.tp_fluxo = 'S')}',
         '${(data.tp_status = 'A')}',
-        '${(data.ds_erro)}',
+        '${data.ds_erro}',
         to_Date('${new Date().toISOString().split('T')[0]}','YYYY-MM-DD'),
         '${(data.tp_registro = '001')}',
-        '${(data.dt_processado)}',
+        '${data.dt_processado}',
         '${(data.tp_movimento = 'I')}',
         '${data.cd_multi_empresa}',
         '${data.reason}',
@@ -83,7 +83,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         to_Date('${data.patient.birthDate}','YYYY-MM-DD'), 
         '${data.patient.document.number}')
         `;
-      await knex.raw(sql)
+      await knex.raw(sql);
 
       let result_func_agenda = await knex.raw(
         `DECLARE
@@ -94,8 +94,15 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         `,
       );
 
-      console.log(result_func_agenda);
+      // let [result2] = await knex.raw(
+      //   `SELECT cd_dti_agenda FROM dataintegra.tbl_dti_agendamento WHERE CD_AGENDAMENTO_INTEGRA = ${data.slotId}`,
+      // );
+      // console.log(result2);
+      // if (!result) {
+      //   throw new Error('Não foi possivel agenda o horario!');
+      // }
 
+      console.log(result_func_agenda);
     } catch (error) {
       console.error(error);
       throw new Error(error.message);
