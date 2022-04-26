@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class RevenuesRepository implements IRevenuesRepository {
   private static INSTANCE: RevenuesRepository;
 
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): RevenuesRepository {
     if (!RevenuesRepository.INSTANCE) {
       RevenuesRepository.INSTANCE = new RevenuesRepository();
@@ -17,7 +17,7 @@ export class RevenuesRepository implements IRevenuesRepository {
     console.log(data);
     try {
       let [result] = await knex.raw(
-        `SELECT cd_dti_beneficiario FROM dataintegra.tbl_dti_beneficiario WHERE cd_beneficiario = ${data.codigo_beneficiario}`,
+        `SELECT cd_dti_beneficiario FROM dbahsi.hsi_beneficiario WHERE cd_beneficiario = ${data.codigo_beneficiario}`,
       );
       console.log(result);
       if (result) {
@@ -29,7 +29,7 @@ export class RevenuesRepository implements IRevenuesRepository {
       );
 
       console.log(seq_agenda[0].SEQ_DTI);
-      const sql = `INSERT INTO dataintegra.tbl_dti_beneficiario(
+      const sql = `INSERT INTO dbahsi.hsi_beneficiario(
         cd_dti_beneficiario, 
         ds_erro, 
         dt_gerado, 
@@ -49,10 +49,10 @@ export class RevenuesRepository implements IRevenuesRepository {
         ('${seq_agenda[0].SEQ_DTI}',
         '${(data.ds_erro = 'null')}',        
         to_Date('${new Date().toISOString().split('T')[0]}','YYYY-MM-DD'),
-        '${(data.codigo_produto)}',
-        '${(data.codigo_beneficiario)}',
-        '${(data.codigo_digito_verificador)}',
-        '${(data.codigo_pref_empresa)}',
+        '${data.codigo_produto}',
+        '${data.codigo_beneficiario}',
+        '${data.codigo_digito_verificador}',
+        '${data.codigo_pref_empresa}',
         '${data.codigo_empresa}',
         '${data.codigo_familiar_benef}', 
         '${data.codigo_prestador}', 

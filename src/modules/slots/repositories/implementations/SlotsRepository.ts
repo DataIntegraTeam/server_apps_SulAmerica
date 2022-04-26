@@ -16,7 +16,13 @@ export class SlotsRepository implements ISlotsRepository {
   async list(date?: string): Promise<Slot[]> {
     let whereDate = '';
     if (date) {
-      whereDate = `AND To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') = To_Date('${date}','YYYY-MM-DD')`;
+      const dateParts = date.split('-').map(date => Number(date))
+      let fifteenDaysAfterTheDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0])
+      fifteenDaysAfterTheDate.setDate(fifteenDaysAfterTheDate.getDate() + 3);
+      const onlyDate = fifteenDaysAfterTheDate.toISOString().split('T')[0];
+
+      console.log(onlyDate);
+      whereDate = `AND To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') >= To_Date('${date}','DD/MM/YYYY') AND To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') <= To_Date('${onlyDate}','YYYY/MM/DD')`;
     }
     const allSlots: any[] = await knex.raw(`
       SELECT it_agenda_central.cd_it_agenda_central,
@@ -25,10 +31,11 @@ export class SlotsRepository implements ISlotsRepository {
         it_agenda_central.hr_agenda,
         'ALL' Genero 
       FROM agenda_central    
-      LEFT JOIN dbamv.it_agenda_central ON it_agenda_central.cd_agenda_central= agenda_central.cd_agenda_central
+      LEFT JOIN dbamv.it_agenda_central ON it_agenda_central.cd_agenda_central= agenda_central.cd_agenda_central      
       WHERE sn_ativo = 'S'
       AND nm_paciente IS NULL 
      ${whereDate}
+     ORDER BY hr_agenda ASC
     `);
 
     const slots: Slot[] = allSlots.map(slot => ({
