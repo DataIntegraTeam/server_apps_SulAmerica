@@ -16,8 +16,10 @@ export class AppointmentsRepository implements IAppointmentsRepository {
   async create(data: Appointment): Promise<void | Error> {
     console.log(data);
     try {
+      // CD_AGENDAMENTO_INTEGRA > FROM dbamv.it_agenda_central
       let [result] = await knex.raw(
-        `SELECT cd_dti_agenda FROM dataintegra.tbl_dti_agendamento WHERE CD_AGENDAMENTO_INTEGRA = ${data.slotId}`,
+        `SELECT * FROM dbamv.it_agenda_central WHERE nm_paciente IS NULL
+        AND cd_it_agenda_central = ${data.slotId}`,
       );
       console.log(result);
       if (!result) {
@@ -27,7 +29,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
       [result] = await knex.raw(
         `SELECT cd_dti_agenda FROM dataintegra.tbl_dti_agendamento WHERE cd_produto = '${data.productId}' AND nr_carteira = '${data.patient.benefitCode}'`,
       );
-      if (!result) {
+      if (result) {
         throw new Error('forbiddenAppointment');
       }
 

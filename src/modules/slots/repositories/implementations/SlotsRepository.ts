@@ -16,16 +16,29 @@ export class SlotsRepository implements ISlotsRepository {
   async list(date?: string): Promise<Slot[]> {
     let whereDate = '';
     if (date) {
-      const dateParts = date.split('-').map(date => Number(date))
-      let fifteenDaysAfterTheDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0])
-      fifteenDaysAfterTheDate.setDate(fifteenDaysAfterTheDate.getDate() + 3);
-      const onlyDate = fifteenDaysAfterTheDate.toISOString().split('T')[0];
+      const dateParts = date.split('-').map(date => Number(date));
+      let fifteenDaysAfterTheDate = new Date(
+        dateParts[2],
+        dateParts[1] - 1,
+        dateParts[0],
+      );
+      fifteenDaysAfterTheDate.setDate(fifteenDaysAfterTheDate.getDate() + 5);
+      var onlyDate = fifteenDaysAfterTheDate.toISOString().split('T')[0];
+      // var onlyDate = await knex.raw(`
+      //   SELECT To_Date('${date}','DD-MM-YYYY') + 15 data 
+      //   FROM DUAL
+      //   `);
 
-      console.log(onlyDate);
-      whereDate = `AND To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') >= To_Date('${date}','DD/MM/YYYY') AND To_Char(it_agenda_central.hr_agenda, 'DD/MM/YYYY') <= To_Date('${onlyDate}','YYYY/MM/DD')`;
+      //whereDate = `AND it_agenda_central.hr_agenda BETWEEN To_Date('${date}', 'DD-MM-YYYY') AND To_Date('${onlyDate}','YYYY-MM-DD')`;
     }
+    console.log(onlyDate);
+    console.log(date);
+
+    // console.log('SELECT');
+
     const allSlots: any[] = await knex.raw(`
-      SELECT it_agenda_central.cd_it_agenda_central,
+      SELECT DISTINCT 
+        it_agenda_central.cd_it_agenda_central,
         agenda_central.cd_prestador,
         agenda_central.cd_unidade_atendimento,
         it_agenda_central.hr_agenda,
@@ -33,18 +46,21 @@ export class SlotsRepository implements ISlotsRepository {
       FROM agenda_central    
       LEFT JOIN dbamv.it_agenda_central ON it_agenda_central.cd_agenda_central= agenda_central.cd_agenda_central      
       WHERE sn_ativo = 'S'
-      AND nm_paciente IS NULL 
-     ${whereDate}
+      AND nm_paciente IS NULL
+      AND it_agenda_central.hr_agenda > SYSDATE  
+      AND it_agenda_central.hr_agenda BETWEEN To_Date('${date}', 'DD-MM-YYYY') AND To_Date('${onlyDate}','YYYY-MM-DD')
      ORDER BY hr_agenda ASC
     `);
+
+    console.log('Saiu')
 
     const slots: Slot[] = allSlots.map(slot => ({
       id: slot.id,
       slotId: slot.CD_IT_AGENDA_CENTRAL,
       professionalId: slot.CD_PRESTADOR,
       unitId: slot.CD_UNIDADE_ATENDIMENTO,
-      productId: 'Identificador do produto, esse padrão SulAmérica.',
-      healthPlan: 'DiretoSP - Plano de saúde. Definido pela SulAmérica',
+      productId: '',
+      healthPlan: '',
       date: slot.HR_AGENDA,
       requirement: {
         gender: slot.TIPO,
@@ -58,3 +74,6 @@ export class SlotsRepository implements ISlotsRepository {
     return slots;
   }
 }
+
+// Ident. do prod., esse padrão SulAmérica.
+// DiretoSP - Plano de saúde. Definido pela SulAmérica
