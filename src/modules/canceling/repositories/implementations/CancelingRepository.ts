@@ -4,7 +4,7 @@ import { TRequestData } from '../../useCases/canceling/CancelingUseCase';
 
 export class CancelingRepository implements ICancelingRepository {
   private static INSTANCE: CancelingRepository;
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): CancelingRepository {
     if (!CancelingRepository.INSTANCE) {
       CancelingRepository.INSTANCE = new CancelingRepository();
