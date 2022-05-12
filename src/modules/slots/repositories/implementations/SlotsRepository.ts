@@ -38,7 +38,8 @@ export class SlotsRepository implements ISlotsRepository {
 
     const allSlots: any[] = await knex.raw(`
       SELECT DISTINCT 
-        it_agenda_central.cd_it_agenda_central,
+      dbamv.it_agenda_central.cd_agenda_central
+        cd_it_agenda_central,
         agenda_central.cd_prestador,
         agenda_central.cd_unidade_atendimento,
         it_agenda_central.hr_agenda,
@@ -51,8 +52,6 @@ export class SlotsRepository implements ISlotsRepository {
       AND it_agenda_central.hr_agenda BETWEEN To_Date('${date}', 'DD-MM-YYYY') AND To_Date('${onlyDate}','YYYY-MM-DD')
      ORDER BY hr_agenda ASC
     `);
-
-    console.log('Saiu')
 
     const slots: Slot[] = allSlots.map(slot => ({
       id: slot.id,
