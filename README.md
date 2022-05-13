@@ -32,7 +32,7 @@ Etapas concluídas:
   Desta forma sera criado um agendamento com id `appointmentId`.
 
   ### Cancelar Agendamento:
-  O Cancelamento do Agendamento ira usar `patientBenefitCode` era ira passar o como params o `appointmentId` na rota.
+  O Cancelamento do Agendamento ira usar `patientBenefitCode` e ira passar o params `appointmentId` na rota.
     
   Ficando assim:
   ```
