@@ -5,7 +5,7 @@ import knex from '../../../../database/db';
 export class RevenuesRepository implements IRevenuesRepository {
   private static INSTANCE: RevenuesRepository;
 
-  private constructor() {}
+  private constructor() { }
   public static getInstance(): RevenuesRepository {
     if (!RevenuesRepository.INSTANCE) {
       RevenuesRepository.INSTANCE = new RevenuesRepository();
@@ -25,7 +25,7 @@ export class RevenuesRepository implements IRevenuesRepository {
       }
 
       const seq_agenda = await knex.raw(
-        `SELECT dataintegra.seq_dti_beneficicario.nextval seq_dti from dual`,
+        `SELECT dataintegra.seq_dti_beneficiario.nextval seq_dti from dual`,
       );
 
       console.log(seq_agenda[0].SEQ_DTI);
