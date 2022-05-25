@@ -17,9 +17,11 @@ export class AppointmentsRepository implements IAppointmentsRepository {
     console.log(data);
     try {
       // CD_AGENDAMENTO_INTEGRA > FROM dbamv.it_agenda_central
-      let [result] = await knex.raw(
-        `SELECT * FROM dbamv.it_agenda_central WHERE nm_paciente IS NULL
-        AND cd_it_agenda_central = ${data.slotId}`,
+      let [result] = await knex.raw(`
+      SELECT nm_paciente FROM dbamv.it_agenda_central WHERE cd_it_agenda_central = ${data.slotId}      
+      `,
+        // `SELECT * FROM dbamv.it_agenda_central WHERE nm_paciente IS NULL
+        // AND cd_it_agenda_central = ${data.slotId}`,
       );
       console.log(result);
       if (!result) {

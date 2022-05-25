@@ -15,8 +15,8 @@ function authentication(req: Request, res: Response, next: NextFunction) {
   const password = auth[1];
 
   if (
-    username == 'dWtT!fdQ%Ya&' &&
-    password == '!sS6P1&7YS4TxX82wI%tOu*PV7hj'
+    username == 'sulamerica_integ' &&
+    password == 'S8800Aaainteg#'
   ) {
     next();
   } else {
