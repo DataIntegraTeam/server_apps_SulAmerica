@@ -1,17 +1,27 @@
 import knex from 'knex';
-import Oracle from 'oracledb';
+import Oracle, { connectionClass, getConnection } from 'oracledb';
 
-Oracle.initOracleClient({ libDir: process.env.ORACLE_DIR });
-//Oracle.initOracleClient({ libDir: "/home/marcelo/Documentos/DataIntegra/DB/instantclient_19_6_win64" });
+try {
+  Oracle.initOracleClient({
+    libDir: 'C:\\oracle\\instantclient_21_3',
+  });
+  console.log('ok');
+} catch (e) {
+  console.error('Opssss carai deu erro');
+  console.error(e);
+  process.exit(1);
+}
 
 const db = knex({
   client: 'oracledb',
 
   connection: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB,
+    // host: 'C:\\Users\\integ\\Documents\\Wallet\\Wallet_DBDATAINTEGRA',
+    user: 'admin',
+    password: 'Dataintegra@2022',
+    // database: 'dbdataintegra_high',
+    database: 'DBDATAINTEGRA',
+    connectString: 'dbdataintegra_high',
   },
   pool: {
     min: 1,
