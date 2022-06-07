@@ -20,7 +20,7 @@ export class RevenuesRepository implements IRevenuesRepository {
         `SELECT cd_dti_beneficiario FROM dbahsi.hsi_beneficiario WHERE cd_beneficiario = ${data.codigo_beneficiario}`,
       );
       console.log(result);
-      if (result) {
+      if (!result) {
         throw new Error('RegisteredAlreadyExists!');
       }
 
