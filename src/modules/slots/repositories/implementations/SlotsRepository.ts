@@ -22,7 +22,7 @@ export class SlotsRepository implements ISlotsRepository {
         dateParts[1] - 1,
         dateParts[0],
       );
-      fifteenDaysAfterTheDate.setDate(fifteenDaysAfterTheDate.getDate() + 3);
+      fifteenDaysAfterTheDate.setDate(fifteenDaysAfterTheDate.getDate() + 10);
       var onlyDate = fifteenDaysAfterTheDate.toISOString().split('T')[0];
       // var onlyDate = await knex.raw(`
       //   SELECT To_Date('${date}','DD-MM-YYYY') + 15 data 
